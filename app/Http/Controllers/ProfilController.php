@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProfilRequest;
 use App\Http\Requests\UpdateProfilRequest;
 use App\Models\Profil;
+use App\Models\User;
+use App\Repositories\ProfilRepository;
+use Illuminate\Support\Facades\Auth;
 
 class ProfilController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ProfilRepository $profilRepository)
     {
-        //
+        $user = Auth::guard("sanctum")->user();
+        return $profilRepository->getAllProfils($user instanceof User);
     }
 
     /**

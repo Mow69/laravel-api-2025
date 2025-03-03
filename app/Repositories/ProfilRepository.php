@@ -45,6 +45,24 @@ class ProfilRepository
         return $profil->fresh();
     }
 
+    public function updateProfil(Profil $profil, array $validatedData): Profil
+    {
+        if (isset($validatedData['status'])) {
+            $status = Status::where('name', $validatedData['status'])->first();
+            $validatedData['status_id'] = $status->id;
+            unset($validatedData['status']);
+        }
+
+        if (isset($validatedData['image'])) {
+            $profil->clearMediaCollection('avatar');
+            $profil->addMedia($validatedData['image'])
+                  ->toMediaCollection('avatar');
+        }
+
+        $profil->update($validatedData);
+        return $profil->fresh();
+    }
+
     public function deleteProfil(Profil $profil): bool
     {
         $profil->clearMediaCollection('avatar');

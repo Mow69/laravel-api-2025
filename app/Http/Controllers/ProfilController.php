@@ -48,18 +48,22 @@ class ProfilController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProfilRequest $request, Profil $profil)
+    public function update(UpdateProfilRequest $request, Profil $profil): JsonResponse
     {
-        //
+        $updatedProfil = $this->profilRepository->updateProfil($profil, $request->validated());
+        
+        return response()->json([
+            'profil' => $updatedProfil
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Profil $profil)
+    public function destroy(Profil $profil): JsonResponse
     {
-        
         $this->profilRepository->deleteProfil($profil);
         
-        return response()->json([], 204);    }
+        return response()->json([], 204); 
+    }
 }

@@ -29,4 +29,20 @@ class ProfilRepository
         return $query->paginate($perPage);
     }
 
+    public function createProfil(array $validatedData): Profil
+    {
+        $status = Status::where('name', $validatedData['status'])->first();
+        $validatedData['status_id'] = $status->id;
+        unset($validatedData['status']);
+
+        $profil = Profil::create($validatedData);
+        
+        if (isset($validatedData['image'])) {
+            $profil->addMedia($validatedData['image'])
+                  ->toMediaCollection('avatar');
+        }
+
+        return $profil->fresh();
+    }
+
 }

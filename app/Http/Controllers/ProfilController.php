@@ -34,35 +34,15 @@ class ProfilController
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreProfilRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Profil $profil)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Profil $profil)
-    {
-        //
+        $profil = $this->profilRepository->createProfil($request->validated());
+        
+        return response()->json([
+            'profil' => $profil
+        ]);
     }
 
     /**

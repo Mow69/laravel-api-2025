@@ -16,7 +16,6 @@ return new class extends Migration
             $table->timestamps();
             $table->string('lastname');
             $table->string('firstname');
-            $table->string('image_path');
             $table->foreignId('status_id');
         });
     }

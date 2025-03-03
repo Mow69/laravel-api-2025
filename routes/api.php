@@ -14,3 +14,9 @@ Route::post('/login', [AuthController::class, 'authenticate']);
 Route::apiResources([
     'profils' => ProfilController::class
 ], ['only' => ['index']]);
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::apiResources([
+        'profils' => ProfilController::class,
+    ], ['only' => ['store', 'update', 'destroy']]);
+});

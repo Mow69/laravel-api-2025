@@ -10,6 +10,8 @@ class Status extends Model
     protected $fillable = ['name'];
 
     protected $casts = [
-        'name' => StatusType::class
+        'name' => StatusType::class,
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s'
     ];
 }

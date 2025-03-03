@@ -10,9 +10,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class ProfilRepository
 {
     /**
-     * Get all profils with pagination for authenticated user
+     * Get all profils with pagination filtred by active status with hidden statuses if not authenticated user
      */
-    public function getAllProfils(bool $isAuthenticated): LengthAwarePaginator
+    public function getAllProfils(bool $isAuthenticated, int $perPage = 15): LengthAwarePaginator
     {
         $query = Profil::query();
 
@@ -26,7 +26,7 @@ class ProfilRepository
                   ->select('profils.*', 'statuses.label as status');
         }
         
-        return $query->paginate(15);
+        return $query->paginate($perPage);
     }
 
 }

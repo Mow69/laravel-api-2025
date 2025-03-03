@@ -7,17 +7,30 @@ use App\Http\Requests\UpdateProfilRequest;
 use App\Models\Profil;
 use App\Models\User;
 use App\Repositories\ProfilRepository;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProfilController
 {
+    public function __construct(
+        private ProfilRepository $profilRepository
+    ) {}
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource with pagination (by default, per_page = 15)
      */
-    public function index(ProfilRepository $profilRepository)
+    public function index(Request $request): JsonResponse
     {
         $user = Auth::guard("sanctum")->user();
-        return $profilRepository->getAllProfils($user instanceof User);
+
+        $perPage = $request->input('per_page', 15);
+        $profils = $this->profilRepository->getAllProfils(
+            $user instanceof User,
+            $perPage
+        );
+        
+        return response()->json($profils);
     }
 
     /**

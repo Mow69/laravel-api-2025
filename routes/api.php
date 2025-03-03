@@ -13,4 +13,4 @@ Route::post('/login', [AuthController::class, 'authenticate']);
 
 Route::apiResources([
     'profils' => ProfilController::class
-]);
+], ['only' => ['index']]);

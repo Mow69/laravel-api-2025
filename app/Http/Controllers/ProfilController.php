@@ -36,7 +36,7 @@ class ProfilController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProfilRequest $request)
+    public function store(StoreProfilRequest $request): JsonResponse
     {
         $profil = $this->profilRepository->createProfil($request->validated());
         
@@ -58,6 +58,8 @@ class ProfilController
      */
     public function destroy(Profil $profil)
     {
-        //
-    }
+        
+        $this->profilRepository->deleteProfil($profil);
+        
+        return response()->json([], 204);    }
 }

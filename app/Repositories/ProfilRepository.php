@@ -45,4 +45,9 @@ class ProfilRepository
         return $profil->fresh();
     }
 
+    public function deleteProfil(Profil $profil): bool
+    {
+        $profil->clearMediaCollection('avatar');
+        return $profil->delete();
+    }
 }

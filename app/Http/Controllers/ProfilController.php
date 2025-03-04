@@ -10,6 +10,7 @@ use App\Repositories\ProfilRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProfilController
 {
@@ -22,6 +23,7 @@ class ProfilController
      */
     public function index(Request $request): JsonResponse
     {
+        Gate::authorize('viewAny', Profil::class);
         $user = Auth::guard("sanctum")->user();
 
         $perPage = $request->input('per_page', 15);
@@ -38,6 +40,8 @@ class ProfilController
      */
     public function store(StoreProfilRequest $request): JsonResponse
     {
+        Gate::authorize('create', Profil::class);
+
         $profil = $this->profilRepository->createProfil($request->validated());
         
         return response()->json([
@@ -50,6 +54,8 @@ class ProfilController
      */
     public function update(UpdateProfilRequest $request, Profil $profil): JsonResponse
     {
+        Gate::authorize('update', $profil);
+
         $updatedProfil = $this->profilRepository->updateProfil($profil, $request->validated());
         
         return response()->json([
@@ -62,6 +68,8 @@ class ProfilController
      */
     public function destroy(Profil $profil): JsonResponse
     {
+        Gate::authorize('delete', $profil);
+        
         $this->profilRepository->deleteProfil($profil);
         
         return response()->json([], 204); 

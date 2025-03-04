@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "8f8d1050-86b0-4b85-9784-dd0e8fe193f5",
+		"name": "laravel-api-2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8969158"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test@example.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get current user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all profils",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/profils?per_page=2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"profils"
+					],
+					"query": [
+						{
+							"key": "per_page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a profil",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstname",
+							"value": "test1 prenom2",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "test1 nom2",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "active",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/mouaz/Downloads/web-atrio-test.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/profils",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"profils"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a profil",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/profils/9",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"profils",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a profil",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "multipart/form-data",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "_method",
+							"value": "PUT",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "test1 prenom",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "test1 nom",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "active",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/mouaz/Downloads/web-atrio-test.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/profils/9",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"profils",
+						"9"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearer_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"try {\r",
+					"    if(!pm.collectionVariables.get(\"bearer_token\")) {\r",
+					"        const response = await pm.sendRequest({\r",
+					"            url: pm.environment.get(\"base_url\") + \"/login\",\r",
+					"            method: \"POST\",\r",
+					"            header: {\r",
+					"                'Accept': 'application/json',\r",
+					"                'Content-type': 'application/json'\r",
+					"            },\r",
+					"            body: \r",
+					"            {\r",
+					"                mode: 'raw',\r",
+					"                raw: {\r",
+					"                    \"email\": \"test@example.com\",\r",
+					"                    \"password\": \"password\"\r",
+					"                }\r",
+					"            }\r",
+					"        });\r",
+					"\r",
+					"        pm.collectionVariables.set(\"bearer_token\", response.json().access_token);\r",
+					"    }\r",
+					"\r",
+					"} catch (err) {\r",
+					"    console.error(err);\r",
+					"}\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bearer_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

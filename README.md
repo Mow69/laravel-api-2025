@@ -1,3 +1,41 @@
+# <p align="center">Laravel API 2025<p>
+
+## Installation
+Clonez le projet :  
+`git clone git@github.com:Mow69/laravel-api-2025.git`  
+`cd laravel-api-2025`
+
+Installez les dépendances avec Composer :  
+`composer install`
+
+Copiez le fichier `.env.example` en `.env` :  
+`cp -p .env.example .env`
+
+Lancez les conteneurs Docker avec Sail :  
+`sail up -d`
+
+Exécutez les migrations et les seeds :  
+`sail a migrate --seed`
+
+## Accès aux Images Stockées sur le Bucket
+Rendez-vous à l'adresse suivante pour accéder à l'interface de gestion des fichiers :  
+`http://localhost:8900/browser`
+
+Connectez-vous avec les valeurs des constantes présentes dans votre fichier `.env`.  
+Créez un Bucket à l'adresse :  
+`http://localhost:8900/buckets/local/admin/summary`
+
+Changez la valeur de l'Access Policy en **Public**.  
+Les images seront visibles à l'adresse suivante :  
+`http://localhost:8900/browser/local`
+
+## Utilisation de Postman
+Importez l'environnement et la collection dans Postman. Ces fichiers se trouvent dans le dossier `postman/` du projet.  
+Pour exécuter les requêtes **Create**, **Update**, **Delete**, ou pour récupérer les statuts des profils de la requête **Get all profils**, vous devez d'abord exécuter la requête **Login**.  
+Copiez le **Bearer Token** (`access_token`) dans le résultat de la requête **Login** et collez-le comme valeur de la variable `bearer_token` dans la collection Postman.
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

@@ -21,8 +21,13 @@ Exécutez les migrations et les seeds :
 Rendez-vous à l'adresse suivante pour accéder à l'interface de gestion des fichiers :  
 `http://localhost:8900/browser`
 
-Connectez-vous avec les valeurs des constantes présentes dans votre fichier `.env`.  
-Créez un Bucket à l'adresse :  
+Connectez-vous avec les valeurs des constantes présentes dans votre fichier `.env` :
+`AWS_ACCESS_KEY_ID`
+`AWS_SECRET_ACCESS_KEY`
+
+Créez le Bucket et nommez-le comme la valeur de la constante `AWS_BUCKET` du `.env`.
+
+Puis pour le configurer dans la partie admin, rendez-vous à l'adresse :  
 `http://localhost:8900/buckets/local/admin/summary`
 
 Changez la valeur de l'Access Policy en **Public**.  

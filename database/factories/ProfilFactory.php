@@ -25,7 +25,7 @@ class ProfilFactory extends Factory
         ];
     }
 
-    public function configure()
+    public function configure(): static
     {
         return $this->afterCreating(function ($profil) {
             $imageUrl = 'https://picsum.photos/200';

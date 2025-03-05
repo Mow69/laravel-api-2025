@@ -39,6 +39,9 @@ Importez l'environnement et la collection dans Postman. Ces fichiers se trouvent
 Pour exécuter les requêtes **Create**, **Update**, **Delete**, ou pour récupérer les statuts des profils de la requête **Get all profils**, vous devez d'abord exécuter la requête **Login**.  
 Copiez le **Bearer Token** (`access_token`) dans le résultat de la requête **Login** et collez-le comme valeur de la variable `bearer_token` dans la collection Postman.
 
+## Exécuter les tests
+`sail a test`
+
 ---
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
